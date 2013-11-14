@@ -13,7 +13,9 @@ var makeQueue = function(){
 
   instance.dequeue = function(){
     var keyCount = Object.keys(storage).length;
-    delete storage[keyCount-1]; // index = keycount-1
+    var removedKey = storage[keyCount-1];
+    delete storage[keyCount-1];
+    return removedKey;
   };
 
   instance.size = function(){
@@ -22,3 +24,4 @@ var makeQueue = function(){
 
   return instance;
 };
+
