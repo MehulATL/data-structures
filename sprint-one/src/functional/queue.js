@@ -12,9 +12,12 @@ var makeQueue = function(){
   };
 
   instance.dequeue = function(){
-    var keyCount = Object.keys(storage).length;
-    var removedKey = storage[keyCount-1];
-    delete storage[keyCount-1];
+    var removedKey = storage[0];
+    delete storage[0];
+    for (var key in storage){
+      storage[key-1] = storage[key];
+      delete storage[key];
+    }
     return removedKey;
   };
 
