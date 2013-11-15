@@ -17,9 +17,16 @@ describe("linkedList", function() {
   });
 
   // add more tests here to test the functionality of linkedList
-  it("it should have a tail property", function(){
+  it("Tail should have correct value after adding 2 items", function(){
     linkedList.addToTail('a');
-    expect(linkedList.tail).toEqual({value: 'a', next: null});
+    linkedList.addToTail('b');
+    expect(linkedList.tail).toEqual({value: 'b', next: null});
+  });
+
+  it("should have have the correct head value after adding two items", function(){
+    linkedList.addToTail('a');
+    linkedList.addToTail('b');
+    expect(linkedList.head).toEqual({value: 'a', next: {value: 'b', next: null}});
   });
 
 });
