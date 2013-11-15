@@ -6,10 +6,7 @@ var makeStack = function() {
   instance.storage = {};
   instance.len = 0; // Hint: set an initial value here
 
-  // Implement the methods below
-  instance.push = stackMethods.push;
-  instance.pop = stackMethods.pop;
-  instance.size = stackMethods.size;
+  $.extend(instance, stackMethods);
 
   return instance;
 
