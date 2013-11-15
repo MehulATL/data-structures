@@ -29,4 +29,17 @@ describe("linkedList", function() {
     expect(linkedList.head).toEqual({value: 'a', next: {value: 'b', next: null}});
   });
 
+  it("should have correct values for head after adding two items then removing the head", function(){
+    linkedList.addToTail('a');
+    linkedList.addToTail('b');
+    linkedList.removeHead();
+    expect(linkedList.head).toEqual({value: 'b', next: null});
+  });
+
+  it("should return value of removed head node", function(){
+    linkedList.addToTail('a');
+    linkedList.addToTail('b');
+    expect(linkedList.removeHead()).toEqual('a');
+  });
+
 });
