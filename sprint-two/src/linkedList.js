@@ -6,24 +6,43 @@ var makeLinkedList = function(){
 
   list.addToTail = function(value){
     list.tail = makeNode(value);
-    // if the list has no items the head and tail are the same
-    // change the next property of the previously added value to
-    // point to the tail
     if (list.head === null) {
       list.head = list.tail;
     }
-    // list.head = list.tail;
-    list.head.next = makeNode(value);
+
+    // add nodes to the list {};
+    var newKey = Object.keys(list).length;
+    list[newKey] = list.tail;
+
+    // check to see if there is a previous node,
+    // if there is, reassign it's 'next' value.
+    if (newKey > 5) {
+      list[newKey-1].next = list[newKey];
+    }
   };
 
   list.removeHead = function(){
-    //assign list.head to b
+    // reassign head value and return the previous head value
     var removedNode = list.head;
     list.head = list.head.next;
     return removedNode.value;
   };
 
-  list.contains = function(value){
+  // recursive search to find target value.
+  list.contains = function(target){
+    var result = false;
+    var search = function(target, node) {
+      var startNode = node || list.head;
+      if (startNode.value === target) {
+        result = true;
+      } else {
+        if (startNode.next !== null){
+          search(target, startNode.next);
+        }
+      }
+    };
+    search(target);
+    return result;
   };
 
   return list;

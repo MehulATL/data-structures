@@ -42,4 +42,20 @@ describe("linkedList", function() {
     expect(linkedList.removeHead()).toEqual('a');
   });
 
+  it(".contains should return true if requested value is found", function(){
+    linkedList.addToTail('a');
+    linkedList.addToTail('b');
+    linkedList.addToTail('zebra');
+    linkedList.addToTail('d');
+    expect(linkedList.contains('zebra')).toEqual(true);
+  });
+
+it(".contains should return false if requested value is not found", function(){
+    linkedList.addToTail('a');
+    linkedList.addToTail('b');
+    linkedList.addToTail('zebra');
+    linkedList.addToTail('d');
+    expect(linkedList.contains('dog')).toEqual(false);
+  });
+
 });
