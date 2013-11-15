@@ -17,4 +17,9 @@ describe("linkedList", function() {
   });
 
   // add more tests here to test the functionality of linkedList
+  it("it should have a tail property", function(){
+    linkedList.addToTail('a');
+    expect(linkedList.tail).toEqual({value: 'a', next: null});
+  });
+
 });
