@@ -6,11 +6,21 @@ var makeSet = function(){
 
 var setPrototype = {};
 
-setPrototype.add = function(){
+setPrototype.add = function(string){
+  if (this._storage === undefined){
+    this._storage = {};
+  }
+  this._storage[string] = true;
 };
 
-setPrototype.contains = function(){
+setPrototype.contains = function(string){
+  if (this._storage[string]){
+    return true;
+  } else {
+    return false;
+  }
 };
 
-setPrototype.remove = function(){
+setPrototype.remove = function(string){
+  delete this._storage[string];
 };
