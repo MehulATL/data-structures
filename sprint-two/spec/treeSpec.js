@@ -12,4 +12,19 @@ describe("tree", function() {
   });
 
   // Add more tests here to test the functionality of tree.
+  it("addChild method should add child node to the tree.", function(){
+    tree.addChild('a');
+    expect(tree.children[0].value).toEqual('a');
+  });
+
+  it("should be able to add child node to an existing child node", function(){
+    tree.addChild('a');
+    tree.children[0].addChild('a-1');
+    expect(tree.children[0].children[0].value).toEqual('a-1');
+  });
+
+  it("should be able to chain the addChild method", function(){
+    tree.addChild('a').addChild('a-1');
+    expect(tree.children[0].children[0].value).toEqual('a-1');
+  });
 });
