@@ -27,4 +27,15 @@ describe("tree", function() {
     tree.addChild('a').addChild('a-1');
     expect(tree.children[0].children[0].value).toEqual('a-1');
   });
+
+  it("should return true if the target value is present in tree", function(){
+    tree.addChild('a').addChild('a-1');
+    expect(tree.contains('a-1')).toEqual(true);
+  });
+
+  it("should return false if the target value is not present in tree", function(){
+    tree.addChild('a').addChild('a-1');
+    expect(tree.contains('zebra')).toEqual(false);
+  });
+
 });

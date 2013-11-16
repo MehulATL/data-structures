@@ -21,10 +21,37 @@ treeMethods.addChild = function(input){
 
   this.children.push(node);
 
-  // returning this allows us to chain
+  // returning node allows us to chain
   // addChild methods
   return node;
 };
 
-treeMethods.contains = function(){
+treeMethods.contains = function(target){
+  var that = this;
+  var result = false;
+  var search = function(target, start){
+    var node = start || that.children;
+    each(node, function(item){
+      if (item.value === target) {
+        result = true;
+      } else if (item.children) {
+        search(target, item.children);
+      }
+    });
+  };
+  search(target);
+  return result;
+};
+
+
+var each = function(collection, iterator) {
+  if (Array.isArray(collection)){
+    for (var i = 0; i < collection.length; i++){
+      iterator(collection[i]);
+    }
+  } else {
+    for (var key in collection){
+      iterator(collection[key]);
+    }
+  }
 };
