@@ -1,6 +1,6 @@
 var HashTable = function(){
   this._limit = 8;
-
+  this._size = 0;
   // Use a limited array toßstore inserted elements.
   // It'll keep you from using too much space. Usage:
   //
@@ -27,11 +27,13 @@ HashTable.prototype.insert = function(k, v){
   }
 
   bucket.push([k, v]);
-  // resize storage stuff goes here
+  // check if our bucket needs to resized, if it does, double the size
+  this._size++;
+  if(this._size > this._limit * 0.75){
+    this.resize(this._limit * 2);
+  }
   this._storage.set(i, bucket);
 };
-
-
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
@@ -55,6 +57,21 @@ HashTable.prototype.remove = function(k){
       return tuple[1]; // return the value that was deleted
     }
   }
+};
+
+HashTable.prototype.resize = function(newLimit){
+  var oldStorage = this._storage;
+  this._limit = newLimit;
+  this._storage = makeLimitedArray(this._limit);
+
+  var that = this;
+  // taking old storage data and inserting into new storage
+  oldStorage.each(function(bucket){
+    for (var i=0; i < bucket.length; i++){
+      var tuple = bucket[i];
+      this.insert(tuple[0], tuple[1]);
+    }
+  });
 };
 
 // NOTE: For this code to work, you will NEED the code from hashTableHelpers.js
